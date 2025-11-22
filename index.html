@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dhamma NFT Gacha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Noto Sans Thai"', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+              serif: ['"Noto Serif Thai"', 'ui-serif', 'Georgia', 'serif'],
+            },
+            colors: {
+              primary: '#06C755',
+              'primary-dark': '#05a848',
+              secondary: '#F7F9FA',
+              surface: '#FFFFFF',
+              earth: '#8D6E63',
+              'earth-dark': '#5D4037',
+              gold: '#FFD700',
+            },
+            backgroundSize: {
+              '200': '200% 200%',
+            },
+            animation: {
+              'bounce-slow': 'bounce 3s infinite',
+              'pulse-slow': 'pulse 4s infinite cubic-bezier(0.4, 0, 0.6, 1)',
+              'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+              'rumble': 'rumble 0.3s linear infinite',
+              'fade-in': 'fadeIn 0.4s ease-out forwards',
+              'fade-out-slow': 'fadeOut 1.5s ease-out forwards',
+              'pop': 'pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+              'zoom-in-impact': 'zoomInImpact 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              'shockwave': 'shockwave 0.8s ease-out forwards',
+              'shine': 'shine 3s infinite linear',
+              'shine-vertical': 'shineVertical 4s infinite linear',
+              'float': 'float 6s ease-in-out infinite',
+              'gradient-xy': 'gradient-xy 6s ease infinite',
+              'mist': 'mist 15s infinite linear',
+              'tumble': 'tumble 0.8s linear infinite',
+              'chaos-1': 'chaos1 0.6s linear infinite',
+              'chaos-2': 'chaos2 0.7s linear infinite reverse',
+              'chaos-3': 'chaos3 0.5s linear infinite',
+              'light-blink': 'lightBlink 0.5s steps(2) infinite',
+              'bounce-drop': 'bounceDrop 1s cubic-bezier(0.36, 0, 0.66, -0.56) forwards',
+              'flash-white': 'flashWhite 1s forwards',
+              'spin-slow': 'spin 10s linear infinite',
+              'lantern-float': 'lanternFloat 15s linear infinite',
+              'leaf-fall': 'leafFall 10s linear infinite',
+              'knob-spin': 'knobSpin 0.5s linear infinite',
+              'capsule-drop': 'capsuleDrop 0.8s cubic-bezier(0.5, 0, 1, 0.5) forwards',
+              'wind-up': 'windUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'levitate': 'levitate 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+            },
+            keyframes: {
+              windUp: {
+                '0%': { transform: 'scale(1) translateY(0)' },
+                '60%': { transform: 'scale(0.95) translateY(10px) rotate(-1deg)' }, /* Compress */
+                '100%': { transform: 'scale(1.05) translateY(-5px) rotate(1deg)' } /* Release/Spring */
+              },
+              levitate: {
+                 '0%': { transform: 'translateY(0)' },
+                 '100%': { transform: 'translateY(-25px)' } /* Capsules float up against gravity */
+              },
+              shake: {
+                '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+              },
+              rumble: {
+                 '0%': { transform: 'translate(0, 0) rotate(0deg)' },
+                 '25%': { transform: 'translate(-2px, 2px) rotate(-1deg)' },
+                 '50%': { transform: 'translate(2px, -2px) rotate(1deg)' },
+                 '75%': { transform: 'translate(-2px, -2px) rotate(-1deg)' },
+                 '100%': { transform: 'translate(0, 0) rotate(0deg)' }
+              },
+              tumble: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' }
+              },
+              // Chaos Animations for independent ball movement
+              chaos1: {
+                '0%': { transform: 'translate(0,0) rotate(0deg)' },
+                '25%': { transform: 'translate(10px, -15px) rotate(90deg)' },
+                '50%': { transform: 'translate(-5px, 20px) rotate(180deg)' },
+                '75%': { transform: 'translate(-10px, -5px) rotate(270deg)' },
+                '100%': { transform: 'translate(0,0) rotate(360deg)' }
+              },
+              chaos2: {
+                '0%': { transform: 'translate(0,0) rotate(0deg)' },
+                '33%': { transform: 'translate(-15px, -10px) rotate(-120deg)' },
+                '66%': { transform: 'translate(15px, 5px) rotate(-240deg)' },
+                '100%': { transform: 'translate(0,0) rotate(-360deg)' }
+              },
+              chaos3: {
+                '0%': { transform: 'translate(0,0) rotate(0deg)' },
+                '50%': { transform: 'translate(0, -25px) rotate(180deg)' },
+                '100%': { transform: 'translate(0,0) rotate(360deg)' }
+              },
+              lightBlink: {
+                '0%': { fill: '#78350F' },
+                '50%': { fill: '#FCD34D', filter: 'drop-shadow(0 0 5px #FCD34D)' },
+                '100%': { fill: '#78350F' }
+              },
+              bounceDrop: {
+                '0%': { transform: 'translateY(-100px)', opacity: '0' },
+                '30%': { transform: 'translateY(0)', opacity: '1' },
+                '50%': { transform: 'translateY(-20px)' },
+                '70%': { transform: 'translateY(0)' },
+                '85%': { transform: 'translateY(-8px)' },
+                '100%': { transform: 'translateY(0)' }
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' }
+              },
+              fadeOut: {
+                '0%': { opacity: '1' },
+                '100%': { opacity: '0', visibility: 'hidden' }
+              },
+              pop: {
+                '0%': { transform: 'scale(0.9)', opacity: '0' },
+                '100%': { transform: 'scale(1)', opacity: '1' }
+              },
+              zoomInImpact: {
+                '0%': { transform: 'scale(0.5)', opacity: '0' },
+                '80%': { transform: 'scale(1.05)' },
+                '100%': { transform: 'scale(1)', opacity: '1' }
+              },
+              shockwave: {
+                '0%': { transform: 'scale(0)', opacity: '1', borderWidth: '50px' },
+                '100%': { transform: 'scale(4)', opacity: '0', borderWidth: '0px' }
+              },
+              shine: {
+                '0%': { backgroundPosition: '200% center' },
+                '100%': { backgroundPosition: '-200% center' }
+              },
+              shineVertical: {
+                '0%': { backgroundPosition: 'center 200%' },
+                '100%': { backgroundPosition: 'center -200%' }
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' }
+              },
+              'gradient-xy': {
+                '0%, 100%': {
+                  'background-size': '200% 200%',
+                  'background-position': 'left center'
+                },
+                '50%': {
+                  'background-size': '200% 200%',
+                  'background-position': 'right center'
+                }
+              },
+              mist: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' }
+              },
+              flashWhite: {
+                '0%': { opacity: '0' },
+                '20%': { opacity: '1' },
+                '100%': { opacity: '0' }
+              },
+              lanternFloat: {
+                '0%': { transform: 'translateY(100vh) scale(0.5)', opacity: '0' },
+                '10%': { opacity: '0.8' },
+                '100%': { transform: 'translateY(-20vh) scale(1)', opacity: '0' }
+              },
+              leafFall: {
+                '0%': { transform: 'translateY(-10%) rotate(0deg)', opacity: '0' },
+                '10%': { opacity: '1' },
+                '100%': { transform: 'translateY(110%) rotate(360deg)', opacity: '0' }
+              },
+              knobSpin: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' }
+              },
+              capsuleDrop: {
+                '0%': { transform: 'translateY(0)', opacity: '1' },
+                '100%': { transform: 'translateY(200px)', opacity: '0' }
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        background-color: #f3f4f6; /* Neutral gray frame for desktop */
+        overscroll-behavior-y: none;
+        font-feature-settings: "cv11", "ss01";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .bg-thai-pattern {
+        background-image: radial-gradient(#B45309 0.5px, transparent 0.5px), radial-gradient(#B45309 0.5px, transparent 0.5px);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+        opacity: 1;
+      }
+      .card-shine-effect {
+        background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 70%);
+        background-size: 200% 100%;
+        animation: shine 4s infinite linear;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      
+      /* Global Input/Button Reset */
+      input, button {
+        outline: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
